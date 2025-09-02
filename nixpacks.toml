@@ -2,8 +2,7 @@
 nixPkgs = [
   "openjdk17",
   "maven",
-  "nodejs_20",
-  "npm"
+  "nodejs_20"
 ]
 
 [phases.build]
