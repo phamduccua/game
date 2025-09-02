@@ -1,11 +1,19 @@
 [phases.setup]
-nixPkgs = ["openjdk17", "maven", "nodejs_20"]
+nixPkgs = [
+  "openjdk17",
+  "maven",
+  "nodejs_20",
+  "npm"
+]
 
 [phases.build]
 cmds = [
-  "mvn -f backend/game_tien_tri/pom.xml clean package -DskipTests",
-  "npm --prefix frontend install",
-  "npm --prefix frontend run build"
+  # Build backend
+  "cd backend/game_tien_tri && mvn -B clean package -DskipTests",
+
+  # Build frontend
+  "cd frontend && npm install",
+  "cd frontend && npm run build"
 ]
 
 [start]
