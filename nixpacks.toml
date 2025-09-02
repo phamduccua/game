@@ -7,12 +7,12 @@ nixPkgs = [
 
 [phases.build]
 cmds = [
-  # Build backend
-  "cd backend/game_tien_tri && mvn -B clean package -DskipTests",
+  # Build backend (tự động tìm pom.xml đúng chỗ)
+  "mvn -f backend/game_tien_tri/pom.xml -B clean package -DskipTests",
 
   # Build frontend
-  "cd frontend && npm install",
-  "cd frontend && npm run build"
+  "npm --prefix frontend install",
+  "npm --prefix frontend run build"
 ]
 
 [start]
