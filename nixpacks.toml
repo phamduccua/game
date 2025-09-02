@@ -1,20 +1,17 @@
 [phases.setup]
+nixPkgs = ["openjdk17"]  # hoặc openjdk21 nếu bạn dùng Spring Boot 3.3+
 commands = [
   "echo 'Setup phase'"
 ]
 
 [phases.build]
 commands = [
-  # Build backend Java
   "cd backend && ./mvnw clean package -DskipTests",
-
-  # Build frontend React
   "cd frontend && npm install && npm run build"
 ]
 
 [phases.deploy]
 commands = [
-  # Copy FE build vào BE resources/static
   "cp -r frontend/build backend/src/main/resources/static"
 ]
 
