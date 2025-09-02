@@ -1,26 +1,12 @@
 [phases.setup]
-nixPkgs = ["openjdk17"]
-commands = [
-  "echo 'Setup phase'"
-]
+nixPkgs = ["openjdk17", "maven", "nodejs_20"]
 
 [phases.build]
-commands = [
-  # Build backend Spring Boot
-  "cd backend/game_tien_tri && ./mvnw clean package -DskipTests",
-
-  # Build frontend React
-  "cd frontend && npm install && npm run build"
-]
-
-[phases.deploy]
-commands = [
-  # Copy frontend build vào static của Spring Boot
-  "cp -r frontend/build backend/game_tien_tri/src/main/resources/static"
+cmds = [
+  "mvn -f backend/game_tien_tri/pom.xml clean package -DskipTests",
+  "npm --prefix frontend install",
+  "npm --prefix frontend run build"
 ]
 
 [start]
 cmd = "java -jar backend/game_tien_tri/target/*.jar"
-
-[env]
-PORT = "8080"
