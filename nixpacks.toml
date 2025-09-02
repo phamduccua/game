@@ -9,18 +9,17 @@ commands = [
   "cd backend && ./mvnw clean package -DskipTests",
 
   # Build frontend React
-  "cd ../frontend && npm install && npm run build"
+  "cd frontend && npm install && npm run build"
 ]
 
 [phases.deploy]
 commands = [
-  # Copy FE build vào BE để BE serve
-  "cp -r ../frontend/build backend/src/main/resources/static"
+  # Copy FE build vào BE resources/static
+  "cp -r frontend/build backend/src/main/resources/static"
 ]
 
 [start]
-# Chạy Spring Boot
-command = "java -jar backend/target/*.jar"
+cmd = "java -jar backend/target/*.jar"
 
 [env]
 PORT = "8080"
