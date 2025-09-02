@@ -1,0 +1,24 @@
+# nixpacks.toml
+[phases.setup]
+commands = [
+  "echo 'Setup phase'"
+]
+
+[phases.build]
+commands = [
+  # Build backend Java
+  "cd backend && ./mvnw clean package -DskipTests",
+
+  # Build frontend React
+  "cd ../frontend && npm install && npm run build"
+]
+
+[phases.deploy]
+commands = [
+  # Copy FE build vào BE để BE serve
+  "cp -r ../frontend/build backend/src/main/resources/static"
+]
+
+[env]
+# Port mà Railway sử dụng để expose
+PORT = "8080"
